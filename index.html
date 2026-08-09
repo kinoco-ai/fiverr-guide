@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>【AI×おうちワーク】Fiverrで始める！日本語翻訳・完全スタートガイド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAF3E6;
+    --bg-alt:#F1E7D2;
+    --card:#FFFDF8;
+    --ink:#3B2F26;
+    --ink-soft:#77685A;
+    --moss:#57683F;
+    --moss-dark:#3E4C2C;
+    --ochre:#C77B3E;
+    --ochre-soft:#F4E1CB;
+    --teal:#2A8C82;
+    --teal-dark:#1E6961;
+    --teal-soft:#E1F0EE;
+    --berry:#BE5170;
+    --berry-soft:#F7E3E7;
+    --line:#E4D6BC;
+    --radius:18px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Noto Sans JP", "Hiragino Kaku Gothic ProN", sans-serif;
+    font-size:17px;
+    line-height:1.85;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3{
+    font-family:"Zen Maru Gothic", "Noto Sans JP", sans-serif;
+    color:var(--moss-dark);
+    line-height:1.5;
+    margin:0;
+  }
+
+  a{color:inherit;}
+
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px;}
+
+  /* ---------- decorative spore/spot motif ---------- */
+  .spots{
+    display:flex;
+    gap:10px;
+    align-items:center;
+    justify-content:center;
+    margin:36px 0;
+  }
+  .spots span{
+    width:8px;height:8px;border-radius:50%;
+    background:var(--ochre);
+    opacity:.55;
+  }
+  .spots span:nth-child(2){background:var(--moss);width:11px;height:11px;opacity:.7;}
+  .spots span:nth-child(3){background:var(--berry);opacity:.55;}
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding:64px 0 40px;
+    text-align:center;
+    position:relative;
+  }
+  .hero .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:var(--moss);
+    color:#fff;
+    font-family:"Zen Maru Gothic",sans-serif;
+    font-weight:700;
+    font-size:13px;
+    letter-spacing:.06em;
+    padding:7px 18px;
+    border-radius:999px;
+    margin-bottom:22px;
+  }
+  .hero h1{
+    font-size:clamp(26px,5vw,36px);
+    font-weight:900;
+    margin-bottom:16px;
+  }
+  .hero h1 em{
+    font-style:normal;
+    color:var(--ochre);
+    position:relative;
+  }
+  .hero p.lead{
+    color:var(--ink-soft);
+    font-size:16px;
+    max-width:480px;
+    margin:0 auto;
+  }
+
+  .img-slot{
+    border:2px dashed #C9B79A;
+    background:repeating-linear-gradient(135deg, #F5EBD8, #F5EBD8 10px, #F0E4CC 10px, #F0E4CC 20px);
+    border-radius:var(--radius);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    color:#A4906F;
+    font-size:13px;
+    font-weight:500;
+    text-align:center;
+    padding:28px 16px;
+  }
+  .img-slot .icon{font-size:26px;}
+  .img-slot .rec{font-size:11px;color:#B8A683;}
+
+  .hero .img-slot{height:220px;margin-top:32px;}
+
+  /* ---------- section shell ---------- */
+  section{padding:52px 0;}
+  section.alt{
+    background:var(--bg-alt);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
+  .section-head{margin-bottom:28px;}
+  .section-head .tag{
+    display:inline-block;
+    font-family:"Zen Maru Gothic",sans-serif;
+    font-weight:700;
+    font-size:13px;
+    color:var(--moss);
+    background:var(--card);
+    border:1.5px solid var(--moss);
+    padding:4px 14px;
+    border-radius:999px;
+    margin-bottom:14px;
+  }
+  .section-head h2{font-size:23px;font-weight:900;}
+  .section-head p{color:var(--ink-soft);font-size:15.5px;margin-top:10px;}
+
+  p{margin:0 0 16px;}
+  p:last-child{margin-bottom:0;}
+
+  /* ---------- intro card ---------- */
+  .intro-card{
+    background:var(--card);
+    border-radius:var(--radius);
+    border:1px solid var(--line);
+    padding:26px 28px;
+  }
+
+  /* ---------- steps ---------- */
+  .step{
+    background:var(--card);
+    border-radius:var(--radius);
+    border:1px solid var(--line);
+    padding:26px 28px;
+    margin-bottom:22px;
+  }
+  .step:last-child{margin-bottom:0;}
+  .step-head{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin-bottom:14px;
+  }
+  .step-num{
+    flex:none;
+    width:42px;height:42px;
+    border-radius:50%;
+    background:var(--ochre-soft);
+    color:var(--ochre);
+    font-family:"Zen Maru Gothic",sans-serif;
+    font-weight:900;
+    font-size:17px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .step-head h3{font-size:18.5px;font-weight:700;}
+
+  .step ol, .step ul{
+    margin:0 0 12px;
+    padding-left:22px;
+  }
+  .step ol li, .step ul li{margin-bottom:9px;}
+  .step ol li:last-child, .step ul li:last-child{margin-bottom:0;}
+
+  .note{
+    margin-top:16px;
+    background:var(--bg-alt);
+    border-left:4px solid var(--ochre);
+    padding:12px 16px;
+    border-radius:8px;
+    font-size:14.5px;
+    color:var(--ink-soft);
+  }
+
+  .step .img-slot{height:150px;margin-top:18px;}
+
+  /* ---------- checklist items in step2 ---------- */
+  .field-list{list-style:none;padding:0;margin:0 0 6px;}
+  .field-list li{
+    display:flex;
+    gap:10px;
+    padding:10px 0;
+    border-bottom:1px dashed var(--line);
+    font-size:15.5px;
+  }
+  .field-list li:last-child{border-bottom:none;}
+  .field-list b{
+    flex:none;
+    width:112px;
+    color:var(--moss-dark);
+    font-family:"Zen Maru Gothic",sans-serif;
+    font-weight:700;
+    font-size:14.5px;
+  }
+
+  /* ---------- prompt cards ---------- */
+  .prompt-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:24px 26px;
+    margin-bottom:20px;
+    position:relative;
+  }
+  .prompt-card:last-child{margin-bottom:0;}
+  .prompt-head{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:10px;
+  }
+  .prompt-badge{
+    flex:none;
+    background:var(--teal);
+    color:#fff;
+    font-family:"Zen Maru Gothic",sans-serif;
+    font-weight:700;
+    font-size:13px;
+    padding:5px 12px;
+    border-radius:8px;
+  }
+  .prompt-head h3{font-size:17px;font-weight:700;color:var(--teal-dark);}
+  .prompt-desc{font-size:14.5px;color:var(--ink-soft);margin-bottom:14px;}
+  .prompt-box{
+    background:var(--teal-soft);
+    border:1px solid #BFE0DB;
+    border-radius:12px;
+    padding:18px 20px;
+    font-size:14.5px;
+    line-height:1.9;
+    color:#1E4A45;
+    white-space:pre-wrap;
+    font-family:"Noto Sans JP",monospace;
+  }
+  .prompt-box .field{
+    display:inline-block;
+    background:#fff;
+    border:1px dashed #9FCFC8;
+    border-radius:6px;
+    padding:0 8px;
+    margin-top:4px;
+    color:#3C7A72;
+  }
+
+  /* ---------- advice cards ---------- */
+  .advice{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+  }
+  .advice-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:22px 26px;
+    display:flex;
+    gap:16px;
+  }
+  .advice-icon{
+    flex:none;
+    width:44px;height:44px;
+    border-radius:12px;
+    background:var(--berry-soft);
+    color:var(--berry);
+    display:flex;align-items:center;justify-content:center;
+    font-size:20px;
+  }
+  .advice-card h3{font-size:16.5px;font-weight:700;margin-bottom:6px;color:var(--ink);}
+  .advice-card p{font-size:15px;color:var(--ink-soft);}
+
+  /* ---------- fit-check / supplement ---------- */
+  .fit-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+  }
+  @media(max-width:600px){.fit-grid{grid-template-columns:1fr;}}
+  .fit-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:16px 18px;
+    font-size:14.5px;
+  }
+  .fit-card .h{
+    font-family:"Zen Maru Gothic",sans-serif;
+    font-weight:700;
+    font-size:14.5px;
+    color:var(--moss-dark);
+    margin-bottom:6px;
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+
+  .faq{margin-top:18px;}
+  .faq-item{
+    border-top:1px solid var(--line);
+    padding:16px 0;
+  }
+  .faq-item:last-child{padding-bottom:0;}
+  .faq-q{
+    font-family:"Zen Maru Gothic",sans-serif;
+    font-weight:700;
+    font-size:15.5px;
+    color:var(--moss-dark);
+    margin-bottom:6px;
+  }
+  .faq-a{font-size:14.5px;color:var(--ink-soft);}
+
+  /* ---------- CTA / Instagram footer ---------- */
+  .cta{
+    background:linear-gradient(180deg, var(--moss-dark), #2E3A22);
+    border-radius:26px;
+    padding:44px 30px;
+    text-align:center;
+    color:#F4EFE1;
+    margin-top:8px;
+  }
+  .cta .mush{font-size:34px;margin-bottom:14px;}
+  .cta h2{
+    color:#fff;
+    font-size:22px;
+    font-weight:900;
+    margin-bottom:10px;
+  }
+  .cta p{
+    color:#D8D2BF;
+    font-size:15px;
+    max-width:420px;
+    margin:0 auto 26px;
+  }
+  .profile-card{
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.18);
+    border-radius:18px;
+    padding:20px 22px;
+    max-width:360px;
+    margin:0 auto 24px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    text-align:left;
+  }
+  .profile-avatar{
+    flex:none;
+    width:54px;height:54px;
+    border-radius:50%;
+    background:var(--berry-soft);
+    color:var(--berry);
+    display:flex;align-items:center;justify-content:center;
+    font-size:24px;
+  }
+  .profile-name{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;color:#fff;font-size:15px;}
+  .profile-handle{font-size:13.5px;color:#B9C4A6;margin-top:2px;}
+  .cta-btn{
+    display:inline-block;
+    background:var(--ochre);
+    color:#fff;
+    font-family:"Zen Maru Gothic",sans-serif;
+    font-weight:700;
+    font-size:15.5px;
+    padding:14px 34px;
+    border-radius:999px;
+    text-decoration:none;
+  }
+
+  footer{
+    text-align:center;
+    padding:34px 0 50px;
+    font-size:12.5px;
+    color:#B4A488;
+  }
+
+  @media(max-width:600px){
+    .wrap{padding:0 18px;}
+    .hero{padding:44px 0 30px;}
+    section{padding:40px 0;}
+    .step, .prompt-card, .advice-card, .intro-card{padding:20px 20px;}
+    .field-list b{width:88px;}
+  }
+</style>
+</head>
+<body>
+
+  <div class="hero">
+    <div class="wrap">
+      <span class="eyebrow">🍄 きの子のAIおうちワーク講座</span>
+      <h1>Fiverrで始める<br><em>日本語翻訳</em>・完全スタートガイド</h1>
+      <p class="lead">英語がペラペラじゃなくても大丈夫。AIを相棒にすれば、今日から世界中のお客さまと繋がれます。</p>
+
+ <img src="images/img02.jpg " style="width:100%; border-radius:14px;">
+    </div>
+  </div>
+
+
+
+  <!-- ================= Fiverrとは ================= -->
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <span class="tag">はじめに</span>
+        <h2>🌍 Fiverr（ファイバー）ってどんなサイト？</h2>
+      </div>
+      <div class="intro-card">
+        <p>Fiverrは、世界中の人が自分のスキルやサービスを出品できるサイトです。名前の由来は、初期のサービスが5ドル（約750円）から出品されていたことから。</p>
+        <p>日本でいう「ココナラ」の世界版のようなイメージで、「英語の文章を自然な日本語にしてほしい！」という海外からのニーズが、実はとても多いのが特徴です。AIを活用すれば、英語がペラペラでなくても翻訳のおうちワークをスタートできます。</p>
+       
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 3ステップ ================= -->
+  <section class="alt">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="tag">STEP 1〜3</span>
+        <h2>🚀 Fiverrを始めるための3ステップ</h2>
+        <p>むずかしそうに見えて、実際にやることはシンプル。ひとつずつ進めていきましょう。</p>
+      </div>
+
+      <div class="step">
+        <div class="step-head">
+          <div class="step-num">1</div>
+          <h3>アカウントの作成</h3>
+        </div>
+        <ol>
+          <li><a href="https://www.fiverr.com" target="_blank" rel="noopener" style="color:var(--ochre);font-weight:700;text-decoration:underline;">Fiverrの公式サイト</a>にアクセスする</li>
+          <li>右上の「Join（参加する）」ボタンをタップ</li>
+          <li>Google・Facebook・Appleアカウント、またはメールアドレスから登録方法を選ぶ</li>
+          <li>ユーザー名とパスワードなど、必要な情報を入力する</li>
+          <li>届いた確認メールのリンクをタップして登録完了！</li>
+        </ol>
+      </div>
+
+      <div class="step">
+        <div class="step-head">
+          <div class="step-num">2</div>
+          <h3>プロフィールの設定</h3>
+        </div>
+        <p>世界中のお客さまに見てもらう「お店の看板」です。英語で書く必要がありますが、AIや翻訳ツールを使えば簡単に作れます。</p>
+        <ul class="field-list">
+          <li><b>プロフィール写真</b><span>明るく親しみやすい、信頼感のある写真がGOOD</span></li>
+          <li><b>自己紹介</b><span>「日本語のネイティブスピーカーであること」「丁寧な対応ができること」をアピール</span></li>
+          <li><b>言語</b><span>Japanese：Native／English：Conversational など</span></li>
+          <li><b>スキル</b><span>Translation（翻訳）、Japanese、Proofreading（校正）などを登録</span></li>
+          <li><b>学歴・資格</b><span>持っていれば記入（空欄でもOK！）</span></li>
+        </ul>
+        <div class="note">💡 設定画面から、通貨や住んでいる国（Japan）の設定も忘れずに。</div>
+       <img src="images/img04.jpg " style="width:100%; border-radius:14px;">
+      </div>
+
+      <div class="step">
+        <div class="step-head">
+          <div class="step-num">3</div>
+          <h3>サービス（ギグ）の出品</h3>
+        </div>
+        <p>Fiverrでは、出品するサービスを「Gig（ギグ）」と呼びます。トップページの「Start Selling」または「Become a Seller」から出品を進めましょう。</p>
+        <div class="note">📱 スマホアプリだと英語表記のみの場合があるので、ブラウザやGoogle Chromeの翻訳機能をオンにして進めるのがおすすめです。</div>
+        <ul class="field-list">
+          <li><b>タイトル</b><span>「I will translate English to natural Japanese（英語を自然な日本語に翻訳します）」など、わかりやすく</span></li>
+          <li><b>価格・パッケージ</b><span>文字数ごとに「Basic／Standard／Premium」の3プランを作成</span></li>
+          <li><b>説明文</b><span>どんな翻訳が得意か、対応できるジャンルを記載</span></li>
+          <li><b>画像</b><span>サービス内容が一目でわかる画像（Canvaなどで作成）をアップロード</span></li>
+        </ul>
+      <img src="images/img05.jpg " style="width:100%; border-radius:14px;">
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= AIプロンプト活用法 ================= -->
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <span class="tag">AI活用</span>
+        <h2>🤖 翻訳の質を劇的に上げる！AIプロンプト活用法</h2>
+        <p>Claudeに、この順番で入力するだけ。機械翻訳っぽさのない、自然な日本語に仕上がります。</p>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-head">
+          <span class="prompt-badge">①</span>
+          <h3>ベース翻訳｜まずはプロに任せる万能プロンプト</h3>
+        </div>
+        <p class="prompt-desc">ただ翻訳するだけでなく、AIに「プロの翻訳家」という役割を持たせることで、一気に精度が上がります。</p>
+        <div class="prompt-box">あなたはプロの翻訳家です。以下の英文を、文脈や著者の意図を汲み取り、直訳ではない自然な日本語に翻訳してください。
+
+【英文】
+<span class="field">（ここに翻訳したい英文を貼り付ける）</span></div>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-head">
+          <span class="prompt-badge">②</span>
+          <h3>トーン＆マナー調整｜用途に合わせて着せ替えプロンプト</h3>
+        </div>
+        <p class="prompt-desc">お客さまの要望（ビジネス用か、SNS用かなど）に合わせて、文体を変えたいときに使います。</p>
+        <div class="prompt-box">先ほど翻訳した文章を、以下のトーンに合わせて修正してください。
+
+【指定するトーン】※以下から選んで入力
+・ビジネスメールや企業向け資料に適したフォーマルな表現
+・若者向けSNS（InstagramやTikTok）で使われる親しみやすいカジュアルな表現
+・マニュアルや教科書のような、一貫性のある論理的な表現</div>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-head">
+          <span class="prompt-badge">③</span>
+          <h3>文化・ニュアンスの補正｜行間を読むプロンプト</h3>
+        </div>
+        <p class="prompt-desc">直訳だと日本人に伝わりにくい表現や、専門用語、微妙なニュアンスを整えます。</p>
+        <div class="prompt-box">この翻訳において、英語特有の表現や文化的背景による「日本人には伝わりにくい部分」があれば、日本の文化や習慣に合わせてより自然な言い回しに意訳してください。また、変更した箇所とその理由も教えてください。</div>
+      </div>
+
+      <div class="prompt-card">
+        <div class="prompt-head">
+          <span class="prompt-badge">④</span>
+          <h3>最終チェック｜2つの案を比較するプロンプト</h3>
+        </div>
+        <p class="prompt-desc">複数の翻訳ツールを使ってみたときや、言い回しに迷ったときに、一番自然なものを選んでもらいます。</p>
+        <div class="prompt-box">以下の【A】と【B】の翻訳文を比較し、ネイティブの日本人が読んでより自然で違和感のない方はどちらか教えてください。また、両方の良いところを組み合わせた【最高の翻訳案】をひとつ提案してください。
+
+【A】<span class="field">（翻訳案1を貼る）</span>
+【B】<span class="field">（翻訳案2を貼る）</span></div>
+      </div>
+		 <img src="images/img01.jpg " style="width:100%; border-radius:14px;">
+    </div>
+  </section>
+
+  <!-- ================= アドバイス ================= -->
+  <section class="alt">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="tag">アドバイス</span>
+        <h2>🎁 これから翻訳おうちワークを始めたい人へ</h2>
+      </div>
+      <div class="advice">
+        <div class="advice-card">
+          <div class="advice-icon">①</div>
+          <div>
+            <h3>最初は「実績作り」と割り切る</h3>
+            <p>Fiverrでは評価（レビュー）の数がとても大切です。最初の3〜5件くらいは、相場よりも安い価格（5ドルなど）に設定して「迅速かつ丁寧にやります！」とアピールし、良いレビューを集めることを最優先にしましょう。</p>
+          </div>
+        </div>
+        <div class="advice-card">
+          <div class="advice-icon">②</div>
+          <div>
+            <h3>コミュニケーションもAIをフル活用</h3>
+            <p>海外のお客さまからのメッセージや依頼内容も英語で届きますが、焦らなくて大丈夫。DeepLやAIで日本語に訳し、返信もAIに「丁寧な英語のビジネスメールにして」と頼めば、スムーズにやり取りできます。</p>
+          </div>
+        </div>
+        <div class="advice-card">
+          <div class="advice-icon">③</div>
+          <div>
+            <h3>最後は必ず「自分の目」でチェック</h3>
+            <p>AIの翻訳スキルは素晴らしいですが、時々おかしな日本語になることも。「ネイティブの日本人であるあなた自身の感覚」で読んで違和感がないか確認することこそ、お客さまがお金を払って依頼する最大の理由。自信を持って取り組んでくださいね。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 補足：こんな人に／FAQ ================= -->
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <span class="tag">補足</span>
+        <h2>🔰 始める前に知っておきたいこと</h2>
+      </div>
+
+      <div class="fit-grid">
+        <div class="fit-card">
+          <div class="h">🕒 かかる時間の目安</div>
+          スキマ時間でOK。1件の翻訳は文字数にもよりますが、AIを使えば30分〜1時間ほどで対応できることも多いです。
+        </div>
+        <div class="fit-card">
+          <div class="h">💴 報酬の受け取り方</div>
+          FiverrはPayoneerなどを経由して銀行口座に出金するのが一般的。登録時に受け取り方法もあわせて確認しておくと安心です。
+        </div>
+        <div class="fit-card">
+          <div class="h">🈂️ 英語力について</div>
+          読んで内容を理解できるレベルがあれば十分。書く部分はAIがサポートしてくれます。
+        </div>
+        <div class="fit-card">
+          <div class="h">📝 最初の一歩</div>
+          まずはアカウント作成とプロフィール入力だけでもOK。完璧を目指さず、少しずつ整えていきましょう。
+        </div>
+      </div>
+
+      <div class="faq">
+        <div class="faq-item">
+          <div class="faq-q">Q. 特別なスキルや資格がなくても大丈夫？</div>
+          <div class="faq-a">A. 大丈夫です。日本語ネイティブであること自体が価値になります。まずは実績を積みながら、少しずつ得意分野を広げていくイメージです。</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Q. 依頼が来ないときはどうしたらいい？</div>
+          <div class="faq-a">A. プロフィールやギグの説明文をAIに見直してもらうのがおすすめ。「もっと魅力的に伝わるように改善して」と頼むだけでも、印象が変わることがあります。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CTA ================= -->
+  <section>
+    <div class="wrap">
+      <div class="cta">
+        <div class="mush">🍄🐾</div>
+        <h2>もっとAIおうちワークのコツを知りたい方へ</h2>
+        <p>Instagramでは、AI×おうちワークのリアルな知識やコツを、おまめときの子がゆる〜く発信中。フォローして一緒に一歩ずつ進みましょう！</p>
+
+        <div class="profile-card">
+          <div class="profile-avatar">🍄</div>
+          <div>
+            <div class="profile-name">おまめときの子｜50代のAIのススメ</div>
+            <div class="profile-handle">@kiinoco.omame.ai</div>
+          </div>
+        </div>
+
+        <a class="cta-btn" href="https://kiinoco.omame.ai" target="_blank" rel="noopener">Instagramをフォローする</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    🍄 きの子のAIおうちワーク講座　|　@kiinoco.omame.ai
+  </footer>
+
+</body>
+</html>
