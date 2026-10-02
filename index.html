@@ -3,657 +3,664 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>【AI×おうちワーク】Fiverrで始める！日本語翻訳・完全スタートガイド</title>
+<title>写真を、売れるイラストへ。｜商用レベル変換プロンプト完全ガイド</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;800&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#FAF3E6;
-    --bg-alt:#F1E7D2;
-    --card:#FFFDF8;
-    --ink:#3B2F26;
-    --ink-soft:#77685A;
-    --moss:#57683F;
-    --moss-dark:#3E4C2C;
-    --ochre:#C77B3E;
-    --ochre-soft:#F4E1CB;
-    --teal:#2A8C82;
-    --teal-dark:#1E6961;
-    --teal-soft:#E1F0EE;
-    --berry:#BE5170;
-    --berry-soft:#F7E3E7;
-    --line:#E4D6BC;
-    --radius:18px;
+    --paper:#fdfcfa;
+    --paper-warm:#f7f4ef;
+    --ink:#2b2a26;
+    --ink-soft:#6b6960;
+    --moss:#6f7a5a;
+    --moss-deep:#4f5a3f;
+    --clay:#b98a5e;
+    --line:#e4e0d6;
+    --card:#ffffff;
+    --radius:2px;
   }
-
   *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
+  html,body{margin:0;padding:0;}
   body{
-    margin:0;
-    background:var(--bg);
+    background:var(--paper);
     color:var(--ink);
-    font-family:"Noto Sans JP", "Hiragino Kaku Gothic ProN", sans-serif;
-    font-size:17px;
-    line-height:1.85;
+    font-family:'Noto Sans JP',sans-serif;
+    font-weight:300;
+    line-height:1.9;
+    letter-spacing:.02em;
     -webkit-font-smoothing:antialiased;
   }
+  .mincho{font-family:'Shippori Mincho',serif;}
+  .wrap{max-width:820px;margin:0 auto;padding:0 24px;}
 
-  h1,h2,h3{
-    font-family:"Zen Maru Gothic", "Noto Sans JP", sans-serif;
-    color:var(--moss-dark);
-    line-height:1.5;
-    margin:0;
-  }
-
-  a{color:inherit;}
-
-  .wrap{max-width:760px;margin:0 auto;padding:0 24px;}
-
-  /* ---------- decorative spore/spot motif ---------- */
-  .spots{
-    display:flex;
-    gap:10px;
-    align-items:center;
-    justify-content:center;
-    margin:36px 0;
-  }
-  .spots span{
-    width:8px;height:8px;border-radius:50%;
-    background:var(--ochre);
-    opacity:.55;
-  }
-  .spots span:nth-child(2){background:var(--moss);width:11px;height:11px;opacity:.7;}
-  .spots span:nth-child(3){background:var(--berry);opacity:.55;}
-
-  /* ---------- hero ---------- */
+  /* ---------- HERO ---------- */
   .hero{
-    padding:64px 0 40px;
-    text-align:center;
     position:relative;
+    padding:76px 0 0;
+    text-align:center;
+    overflow:hidden;
   }
-  .hero .eyebrow{
+  .hero-eyebrow{
     display:inline-flex;
     align-items:center;
     gap:8px;
-    background:var(--moss);
-    color:#fff;
-    font-family:"Zen Maru Gothic",sans-serif;
-    font-weight:700;
-    font-size:13px;
-    letter-spacing:.06em;
-    padding:7px 18px;
-    border-radius:999px;
+    font-size:12px;
+    letter-spacing:.28em;
+    color:var(--moss-deep);
     margin-bottom:22px;
   }
-  .hero h1{
-    font-size:clamp(26px,5vw,36px);
-    font-weight:900;
-    margin-bottom:16px;
+  .hero-eyebrow::before,.hero-eyebrow::after{
+    content:"";
+    width:20px;height:1px;background:var(--moss);
+    opacity:.6;
   }
-  .hero h1 em{
-    font-style:normal;
-    color:var(--ochre);
+  h1.hero-title{
+    font-size:clamp(30px,5.4vw,50px);
+    font-weight:800;
+    line-height:1.55;
+    margin:0 0 18px;
+    color:var(--ink);
+  }
+  h1.hero-title small{
+    display:block;
+    font-size:.42em;
+    font-weight:500;
+    color:var(--ink-soft);
+    letter-spacing:.14em;
+    margin-top:14px;
+  }
+  .hero-sub{
+    font-size:14.5px;
+    color:var(--ink-soft);
+    max-width:480px;
+    margin:0 auto 40px;
+  }
+
+  /* 差し替え用ヒーロー画像 */
+  .hero-img-frame{
+    margin:0 auto;
+    max-width:640px;
+    aspect-ratio:4/3;
+    background:
+      linear-gradient(135deg, var(--paper-warm) 25%, transparent 25%) -10px 0/20px 20px,
+      linear-gradient(225deg, var(--paper-warm) 25%, transparent 25%) -10px 0/20px 20px,
+      linear-gradient(315deg, var(--paper-warm) 25%, transparent 25%) 0 0/20px 20px,
+      linear-gradient(45deg, var(--paper-warm) 25%, #fff 25%) 0 0/20px 20px;
+    border:1px solid var(--line);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--ink-soft);
+    font-size:12px;
+    letter-spacing:.1em;
     position:relative;
   }
-  .hero p.lead{
-    color:var(--ink-soft);
-    font-size:16px;
-    max-width:480px;
+  .hero-img-frame img{
+    width:100%;height:100%;object-fit:cover;display:block;
+  }
+  .swap-tag{
+    position:absolute;
+    bottom:10px;right:10px;
+    background:rgba(43,42,38,.78);
+    color:#fff;
+    font-size:10.5px;
+    padding:4px 9px;
+    letter-spacing:.06em;
+    border-radius:2px;
+  }
+
+  section{padding:70px 0;}
+  .divider{
+    width:1px;height:52px;background:var(--line);
     margin:0 auto;
   }
 
-  .img-slot{
-    border:2px dashed #C9B79A;
-    background:repeating-linear-gradient(135deg, #F5EBD8, #F5EBD8 10px, #F0E4CC 10px, #F0E4CC 20px);
-    border-radius:var(--radius);
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:6px;
-    color:#A4906F;
-    font-size:13px;
-    font-weight:500;
-    text-align:center;
-    padding:28px 16px;
+  /* ---------- INTRO ---------- */
+  .intro p{margin:0 0 20px;font-size:15px;}
+  .intro-lead{
+    font-size:17px;
+    color:var(--ink);
+    font-weight:400;
   }
-  .img-slot .icon{font-size:26px;}
-  .img-slot .rec{font-size:11px;color:#B8A683;}
-
-  .hero .img-slot{height:220px;margin-top:32px;}
-
-  /* ---------- section shell ---------- */
-  section{padding:52px 0;}
-  section.alt{
-    background:var(--bg-alt);
+  .need-list{
+    list-style:none;padding:0;margin:26px 0 30px;
     border-top:1px solid var(--line);
     border-bottom:1px solid var(--line);
   }
-  .section-head{margin-bottom:28px;}
-  .section-head .tag{
-    display:inline-block;
-    font-family:"Zen Maru Gothic",sans-serif;
-    font-weight:700;
-    font-size:13px;
-    color:var(--moss);
-    background:var(--card);
-    border:1.5px solid var(--moss);
-    padding:4px 14px;
-    border-radius:999px;
-    margin-bottom:14px;
-  }
-  .section-head h2{font-size:23px;font-weight:900;}
-  .section-head p{color:var(--ink-soft);font-size:15.5px;margin-top:10px;}
-
-  p{margin:0 0 16px;}
-  p:last-child{margin-bottom:0;}
-
-  /* ---------- intro card ---------- */
-  .intro-card{
-    background:var(--card);
-    border-radius:var(--radius);
-    border:1px solid var(--line);
-    padding:26px 28px;
-  }
-
-  /* ---------- steps ---------- */
-  .step{
-    background:var(--card);
-    border-radius:var(--radius);
-    border:1px solid var(--line);
-    padding:26px 28px;
-    margin-bottom:22px;
-  }
-  .step:last-child{margin-bottom:0;}
-  .step-head{
-    display:flex;
-    align-items:center;
-    gap:14px;
-    margin-bottom:14px;
-  }
-  .step-num{
-    flex:none;
-    width:42px;height:42px;
-    border-radius:50%;
-    background:var(--ochre-soft);
-    color:var(--ochre);
-    font-family:"Zen Maru Gothic",sans-serif;
-    font-weight:900;
-    font-size:17px;
-    display:flex;align-items:center;justify-content:center;
-  }
-  .step-head h3{font-size:18.5px;font-weight:700;}
-
-  .step ol, .step ul{
-    margin:0 0 12px;
-    padding-left:22px;
-  }
-  .step ol li, .step ul li{margin-bottom:9px;}
-  .step ol li:last-child, .step ul li:last-child{margin-bottom:0;}
-
-  .note{
-    margin-top:16px;
-    background:var(--bg-alt);
-    border-left:4px solid var(--ochre);
-    padding:12px 16px;
-    border-radius:8px;
-    font-size:14.5px;
-    color:var(--ink-soft);
-  }
-
-  .step .img-slot{height:150px;margin-top:18px;}
-
-  /* ---------- checklist items in step2 ---------- */
-  .field-list{list-style:none;padding:0;margin:0 0 6px;}
-  .field-list li{
-    display:flex;
-    gap:10px;
-    padding:10px 0;
+  .need-list li{
+    padding:15px 4px;
     border-bottom:1px dashed var(--line);
-    font-size:15.5px;
-  }
-  .field-list li:last-child{border-bottom:none;}
-  .field-list b{
-    flex:none;
-    width:112px;
-    color:var(--moss-dark);
-    font-family:"Zen Maru Gothic",sans-serif;
-    font-weight:700;
     font-size:14.5px;
+    display:flex;
+    gap:12px;
+  }
+  .need-list li:last-child{border-bottom:none;}
+  .need-list li::before{
+    content:"◦";
+    color:var(--moss);
+    font-size:16px;
+    flex:0 0 auto;
   }
 
-  /* ---------- prompt cards ---------- */
+  /* ---------- SECTION LABEL ---------- */
+  .section-label{
+    text-align:center;
+    margin-bottom:44px;
+  }
+  .section-label .num{
+    font-family:'Shippori Mincho',serif;
+    font-size:13px;
+    letter-spacing:.3em;
+    color:var(--moss-deep);
+    display:block;
+    margin-bottom:10px;
+  }
+  .section-label h2{
+    font-family:'Shippori Mincho',serif;
+    font-size:clamp(22px,3.6vw,30px);
+    font-weight:600;
+    margin:0;
+  }
+
+  /* ---------- PROMPT CARD ---------- */
   .prompt-card{
     background:var(--card);
     border:1px solid var(--line);
     border-radius:var(--radius);
-    padding:24px 26px;
-    margin-bottom:20px;
-    position:relative;
+    overflow:hidden;
+    margin-bottom:52px;
   }
-  .prompt-card:last-child{margin-bottom:0;}
-  .prompt-head{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    margin-bottom:10px;
-  }
-  .prompt-badge{
-    flex:none;
-    background:var(--teal);
-    color:#fff;
-    font-family:"Zen Maru Gothic",sans-serif;
-    font-weight:700;
-    font-size:13px;
-    padding:5px 12px;
-    border-radius:8px;
-  }
-  .prompt-head h3{font-size:17px;font-weight:700;color:var(--teal-dark);}
-  .prompt-desc{font-size:14.5px;color:var(--ink-soft);margin-bottom:14px;}
-  .prompt-box{
-    background:var(--teal-soft);
-    border:1px solid #BFE0DB;
-    border-radius:12px;
-    padding:18px 20px;
-    font-size:14.5px;
-    line-height:1.9;
-    color:#1E4A45;
-    white-space:pre-wrap;
-    font-family:"Noto Sans JP",monospace;
-  }
-  .prompt-box .field{
-    display:inline-block;
-    background:#fff;
-    border:1px dashed #9FCFC8;
-    border-radius:6px;
-    padding:0 8px;
-    margin-top:4px;
-    color:#3C7A72;
-  }
-
-  /* ---------- advice cards ---------- */
-  .advice{
-    display:flex;
-    flex-direction:column;
-    gap:18px;
-  }
-  .advice-card{
-    background:var(--card);
-    border:1px solid var(--line);
-    border-radius:var(--radius);
-    padding:22px 26px;
-    display:flex;
-    gap:16px;
-  }
-  .advice-icon{
-    flex:none;
-    width:44px;height:44px;
-    border-radius:12px;
-    background:var(--berry-soft);
-    color:var(--berry);
-    display:flex;align-items:center;justify-content:center;
-    font-size:20px;
-  }
-  .advice-card h3{font-size:16.5px;font-weight:700;margin-bottom:6px;color:var(--ink);}
-  .advice-card p{font-size:15px;color:var(--ink-soft);}
-
-  /* ---------- fit-check / supplement ---------- */
-  .fit-grid{
+  .prompt-card-head{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:14px;
   }
-  @media(max-width:600px){.fit-grid{grid-template-columns:1fr;}}
-  .fit-card{
-    background:var(--card);
-    border:1px solid var(--line);
-    border-radius:14px;
-    padding:16px 18px;
-    font-size:14.5px;
+  @media (max-width:600px){
+    .prompt-card-head{grid-template-columns:1fr;}
   }
-  .fit-card .h{
-    font-family:"Zen Maru Gothic",sans-serif;
-    font-weight:700;
-    font-size:14.5px;
-    color:var(--moss-dark);
-    margin-bottom:6px;
-    display:flex;
-    align-items:center;
-    gap:6px;
-  }
-
-  .faq{margin-top:18px;}
-  .faq-item{
-    border-top:1px solid var(--line);
-    padding:16px 0;
-  }
-  .faq-item:last-child{padding-bottom:0;}
-  .faq-q{
-    font-family:"Zen Maru Gothic",sans-serif;
-    font-weight:700;
-    font-size:15.5px;
-    color:var(--moss-dark);
-    margin-bottom:6px;
-  }
-  .faq-a{font-size:14.5px;color:var(--ink-soft);}
-
-  /* ---------- CTA / Instagram footer ---------- */
-  .cta{
-    background:linear-gradient(180deg, var(--moss-dark), #2E3A22);
-    border-radius:26px;
-    padding:44px 30px;
-    text-align:center;
-    color:#F4EFE1;
-    margin-top:8px;
-  }
-  .cta .mush{font-size:34px;margin-bottom:14px;}
-  .cta h2{
-    color:#fff;
-    font-size:22px;
-    font-weight:900;
-    margin-bottom:10px;
-  }
-  .cta p{
-    color:#D8D2BF;
-    font-size:15px;
-    max-width:420px;
-    margin:0 auto 26px;
-  }
-  .profile-card{
-    background:rgba(255,255,255,.08);
-    border:1px solid rgba(255,255,255,.18);
-    border-radius:18px;
-    padding:20px 22px;
-    max-width:360px;
-    margin:0 auto 24px;
-    display:flex;
-    align-items:center;
-    gap:14px;
-    text-align:left;
-  }
-  .profile-avatar{
-    flex:none;
-    width:54px;height:54px;
-    border-radius:50%;
-    background:var(--berry-soft);
-    color:var(--berry);
+  .prompt-img-frame{
+    aspect-ratio:3/4;
+    background:var(--paper-warm);
     display:flex;align-items:center;justify-content:center;
-    font-size:24px;
+    position:relative;
+    border-bottom:1px solid var(--line);
   }
-  .profile-name{font-family:"Zen Maru Gothic",sans-serif;font-weight:700;color:#fff;font-size:15px;}
-  .profile-handle{font-size:13.5px;color:#B9C4A6;margin-top:2px;}
-  .cta-btn{
-    display:inline-block;
-    background:var(--ochre);
+  @media (min-width:601px){
+    .prompt-img-frame{border-bottom:none;border-right:1px solid var(--line);}
+  }
+  .prompt-img-frame img{width:100%;height:100%;object-fit:cover;display:block;}
+  .placeholder-txt{
+    color:var(--ink-soft);
+    font-size:12px;
+    letter-spacing:.08em;
+    text-align:center;
+    line-height:1.8;
+  }
+  .prompt-intro{
+    padding:32px 30px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+  }
+  .prompt-tag{
+    font-family:'Shippori Mincho',serif;
+    font-size:12px;
+    letter-spacing:.2em;
+    color:var(--moss-deep);
+    margin-bottom:8px;
+  }
+  .prompt-intro h3{
+    font-family:'Shippori Mincho',serif;
+    font-size:22px;
+    font-weight:600;
+    margin:0 0 14px;
+  }
+  .prompt-intro p{
+    font-size:13.5px;
+    color:var(--ink-soft);
+    margin:0 0 10px;
+  }
+  .fit-badges{
+    display:flex;flex-wrap:wrap;gap:8px;
+    margin-top:14px;
+  }
+  .fit-badges span{
+    font-size:11px;
+    padding:5px 10px;
+    border:1px solid var(--line);
+    color:var(--moss-deep);
+    border-radius:20px;
+  }
+
+  .prompt-body{padding:0 30px 34px;}
+  .prompt-body h4{
+    font-size:12.5px;
+    letter-spacing:.1em;
+    color:var(--ink-soft);
+    margin:26px 0 10px;
+    font-weight:500;
+  }
+  .prompt-box{
+    background:var(--paper-warm);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:20px 22px;
+    font-size:13px;
+    color:var(--ink);
+    white-space:pre-wrap;
+    line-height:1.95;
+    position:relative;
+  }
+  .copy-btn{
+    position:absolute;
+    top:12px;right:12px;
+    font-size:11px;
+    background:var(--ink);
     color:#fff;
-    font-family:"Zen Maru Gothic",sans-serif;
-    font-weight:700;
+    border:none;
+    padding:6px 12px;
+    border-radius:20px;
+    cursor:pointer;
+    letter-spacing:.05em;
+    font-family:'Noto Sans JP',sans-serif;
+  }
+  .copy-btn:hover{background:var(--moss-deep);}
+  .tip-box{
+    margin-top:16px;
+    padding:16px 18px;
+    border-left:2px solid var(--moss);
+    background:transparent;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+  .tip-box b{color:var(--ink);font-weight:500;}
+
+  /* ---------- HOW TO ---------- */
+  .steps{
+    counter-reset:step;
+    display:grid;
+    gap:16px;
+  }
+  .step{
+    display:grid;
+    grid-template-columns:44px 1fr;
+    gap:18px;
+    align-items:start;
+    padding:20px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .step:last-child{border-bottom:none;}
+  .step .n{
+    font-family:'Shippori Mincho',serif;
+    font-size:24px;
+    color:var(--moss);
+    line-height:1;
+  }
+  .step h4{margin:0 0 6px;font-size:15px;font-weight:500;}
+  .step p{margin:0;font-size:13.5px;color:var(--ink-soft);}
+
+  /* ---------- WORK TIPS ---------- */
+  .worktips{
+    background:var(--moss-deep);
+    color:#fbf9f4;
+    border-radius:var(--radius);
+    padding:52px 40px;
+  }
+  .worktips .section-label h2,.worktips .section-label .num{color:#fbf9f4;}
+  .worktips-lead{
     font-size:15.5px;
-    padding:14px 34px;
-    border-radius:999px;
+    text-align:center;
+    max-width:520px;
+    margin:0 auto 40px;
+    color:#f1efe6;
+  }
+  .worktips-lead b{color:#fff;}
+  .wt-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:22px;
+  }
+  @media (max-width:600px){.wt-grid{grid-template-columns:1fr;}}
+  .wt-card{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.18);
+    padding:22px 22px 24px;
+    border-radius:var(--radius);
+  }
+  .wt-card .wt-num{
+    font-family:'Shippori Mincho',serif;
+    font-size:12px;
+    letter-spacing:.15em;
+    color:#c9d4b9;
+    margin-bottom:10px;
+    display:block;
+  }
+  .wt-card h4{margin:0 0 10px;font-size:15px;font-weight:500;color:#fff;}
+  .wt-card p{margin:0;font-size:13px;color:#e5e2d6;}
+  .cta-line{
+    text-align:center;
+    margin-top:40px;
+    padding-top:30px;
+    border-top:1px solid rgba(255,255,255,.18);
+  }
+  .cta-line .big{
+    font-family:'Shippori Mincho',serif;
+    font-size:19px;
+    display:block;
+    margin-bottom:6px;
+  }
+  .cta-line span.small{font-size:12.5px;color:#d8d5c8;}
+
+
+  /* ---------- LINE CTA ---------- */
+  .line-cta-copy{
+    width:100%;
+    max-width:600px;
+    margin:0 auto;
+    text-align:left;
+    font-size:15px;
+    line-height:2;
+    color:#f1efe6;
+  }
+  .line-cta-copy p{
+    margin:0 0 22px;
+  }
+  .line-cta-copy p:last-child{
+    margin-bottom:0;
+  }
+  .line-cta-copy b{
+    color:#fff;
+    font-weight:500;
+  }
+  .line-cta-highlight{
+    display:block;
+    margin:12px 0 14px;
+    padding:13px 16px 14px;
+    color:#fff;
+    background:rgba(255,255,255,.11);
+    border-left:3px solid #f1e4c9;
+    font-family:'Shippori Mincho',serif;
+    font-size:20px;
+    font-weight:600;
+    line-height:1.7;
+    letter-spacing:.03em;
+  }
+  .line-cta .cta-line{
+    margin-top:34px;
+    padding-top:30px;
+  }
+  .line-btn{
+    display:inline-block;
+    padding:14px 30px;
+    background:#fff;
+    color:var(--moss-deep);
     text-decoration:none;
+    font-weight:500;
+    font-size:14px;
+    letter-spacing:.04em;
+    border-radius:30px;
+  }
+  @media (max-width:600px){
+    .line-cta{
+      padding:44px 24px;
+    }
+    .line-cta-copy{
+      max-width:none;
+      font-size:14px;
+      line-height:1.95;
+    }
+    .line-cta-highlight{
+      font-size:18px;
+      line-height:1.7;
+      padding:12px 14px 13px;
+    }
+    .line-btn{
+      width:100%;
+      max-width:330px;
+      padding:14px 18px;
+    }
   }
 
   footer{
     text-align:center;
-    padding:34px 0 50px;
-    font-size:12.5px;
-    color:#B4A488;
+    padding:40px 0 60px;
+    font-size:11px;
+    color:var(--ink-soft);
+    letter-spacing:.08em;
   }
 
-  @media(max-width:600px){
-    .wrap{padding:0 18px;}
-    .hero{padding:44px 0 30px;}
-    section{padding:40px 0;}
-    .step, .prompt-card, .advice-card, .intro-card{padding:20px 20px;}
-    .field-list b{width:88px;}
-  }
+  ::selection{background:var(--moss);color:#fff;}
 </style>
 </head>
 <body>
 
-  <div class="hero">
-    <div class="wrap">
-      <span class="eyebrow">🍄 きの子のAIおうちワーク講座</span>
-      <h1>Fiverrで始める<br><em>日本語翻訳</em>・完全スタートガイド</h1>
-      <p class="lead">英語がペラペラじゃなくても大丈夫。AIを相棒にすれば、今日から世界中のお客さまと繋がれます。</p>
+<div class="hero wrap">
+  <span class="hero-eyebrow mincho">HOME WORK × AI PROMPT GUIDE</span>
+  <h1 class="hero-title mincho">写真を、<br>売れるイラストへ。
+    <small>スマホの1枚が、商用レベルの素材に変わる神プロンプト集</small>
+  </h1>
+  <p class="hero-sub">クラウドワークス・ココナラでの案件対応から、広告・ポスター素材まで。<br>ChatGPTに写真を渡すだけで完成する、2つの変換プロンプトをご紹介します。</p>
 
- <img src="images/img02.jpg " style="width:100%; border-radius:14px;">
-    </div>
+  <!-- ▼画像差し替え①：タイトル背景・アイキャッチ画像（推奨:横4:3、明るめの写真 or 完成イラスト例） -->
+ <img src="images/top.png " style="width:100%; border-radius:14px;">
+</div>
+
+<div class="divider"></div>
+
+<section class="intro wrap">
+  <p class="intro-lead">スマホで撮った何気ない写真、そのまま眠らせていませんか？📸</p>
+  <p>実はChatGPTを使えば、在宅ワークでそのまま使える「プロ級イラスト」が一瞬で作れてしまいます。専門的な絵のスキルも、高価なソフトも必要ありません。必要なのは、写真1枚と、これから紹介するプロンプトだけです。</p>
+
+  <ul class="need-list">
+    <li>クラウドワークスやココナラで受けられる案件の幅を広げたい</li>
+    <li>ポスターや広告にそのまま使える、高品質な素材が欲しい</li>
+    <li>イラストは描けないけれど、デザイン系の案件にも挑戦してみたい</li>
+  </ul>
+
+  <p>そんな方にこそ知ってほしい「神プロンプト」を、今日は2種類ご用意しました。写真をアップロードして貼り付けるだけで、雰囲気の異なる2タイプの商用レベルイラストが完成します。</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============ PROMPT A ============ -->
+<section class="wrap">
+  <div class="section-label">
+    <span class="num mincho">PROMPT — A</span>
+    <h2>ミニマル・北欧風アート</h2>
   </div>
 
-
-
-  <!-- ================= Fiverrとは ================= -->
-  <section>
-    <div class="wrap">
-      <div class="section-head">
-        <span class="tag">はじめに</span>
-        <h2>🌍 Fiverr（ファイバー）ってどんなサイト？</h2>
+  <div class="prompt-card">
+    <div class="prompt-card-head">
+      <!-- ▼画像差し替え②：Aタイプの完成イメージ（推奨:縦3:4、上半分=写真/下半分=北欧風イラストの完成例） -->
+      <div class="prompt-img-frame" id="img-a">
+        <img src="" alt="ミニマル北欧風アートの完成イメージ" onerror="this.style.display='none'">
+        <div class="placeholder-txt"> <img src="images/1.jpg " style="width:100%; border-radius:14px;"></div>
+        <span class="swap-tag">REPLACE IMAGE</span>
       </div>
-      <div class="intro-card">
-        <p>Fiverrは、世界中の人が自分のスキルやサービスを出品できるサイトです。名前の由来は、初期のサービスが5ドル（約750円）から出品されていたことから。</p>
-        <p>日本でいう「ココナラ」の世界版のようなイメージで、「英語の文章を自然な日本語にしてほしい！」という海外からのニーズが、実はとても多いのが特徴です。AIを活用すれば、英語がペラペラでなくても翻訳のおうちワークをスタートできます。</p>
-       
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= 3ステップ ================= -->
-  <section class="alt">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="tag">STEP 1〜3</span>
-        <h2>🚀 Fiverrを始めるための3ステップ</h2>
-        <p>むずかしそうに見えて、実際にやることはシンプル。ひとつずつ進めていきましょう。</p>
-      </div>
-
-      <div class="step">
-        <div class="step-head">
-          <div class="step-num">1</div>
-          <h3>アカウントの作成</h3>
-        </div>
-        <ol>
-          <li><a href="https://www.fiverr.com" target="_blank" rel="noopener" style="color:var(--ochre);font-weight:700;text-decoration:underline;">Fiverrの公式サイト</a>にアクセスする</li>
-          <li>右上の「Join（参加する）」ボタンをタップ</li>
-          <li>Google・Facebook・Appleアカウント、またはメールアドレスから登録方法を選ぶ</li>
-          <li>ユーザー名とパスワードなど、必要な情報を入力する</li>
-          <li>届いた確認メールのリンクをタップして登録完了！</li>
-        </ol>
-      </div>
-
-      <div class="step">
-        <div class="step-head">
-          <div class="step-num">2</div>
-          <h3>プロフィールの設定</h3>
-        </div>
-        <p>世界中のお客さまに見てもらう「お店の看板」です。英語で書く必要がありますが、AIや翻訳ツールを使えば簡単に作れます。</p>
-        <ul class="field-list">
-          <li><b>プロフィール写真</b><span>明るく親しみやすい、信頼感のある写真がGOOD</span></li>
-          <li><b>自己紹介</b><span>「日本語のネイティブスピーカーであること」「丁寧な対応ができること」をアピール</span></li>
-          <li><b>言語</b><span>Japanese：Native／English：Conversational など</span></li>
-          <li><b>スキル</b><span>Translation（翻訳）、Japanese、Proofreading（校正）などを登録</span></li>
-          <li><b>学歴・資格</b><span>持っていれば記入（空欄でもOK！）</span></li>
-        </ul>
-        <div class="note">💡 設定画面から、通貨や住んでいる国（Japan）の設定も忘れずに。</div>
-       <img src="images/img04.jpg " style="width:100%; border-radius:14px;">
-      </div>
-
-      <div class="step">
-        <div class="step-head">
-          <div class="step-num">3</div>
-          <h3>サービス（ギグ）の出品</h3>
-        </div>
-        <p>Fiverrでは、出品するサービスを「Gig（ギグ）」と呼びます。トップページの「Start Selling」または「Become a Seller」から出品を進めましょう。</p>
-        <div class="note">📱 スマホアプリだと英語表記のみの場合があるので、ブラウザやGoogle Chromeの翻訳機能をオンにして進めるのがおすすめです。</div>
-        <ul class="field-list">
-          <li><b>タイトル</b><span>「I will translate English to natural Japanese（英語を自然な日本語に翻訳します）」など、わかりやすく</span></li>
-          <li><b>価格・パッケージ</b><span>文字数ごとに「Basic／Standard／Premium」の3プランを作成</span></li>
-          <li><b>説明文</b><span>どんな翻訳が得意か、対応できるジャンルを記載</span></li>
-          <li><b>画像</b><span>サービス内容が一目でわかる画像（Canvaなどで作成）をアップロード</span></li>
-        </ul>
-      <img src="images/img05.jpg " style="width:100%; border-radius:14px;">
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= AIプロンプト活用法 ================= -->
-  <section>
-    <div class="wrap">
-      <div class="section-head">
-        <span class="tag">AI活用</span>
-        <h2>🤖 翻訳の質を劇的に上げる！AIプロンプト活用法</h2>
-        <p>Claudeに、この順番で入力するだけ。機械翻訳っぽさのない、自然な日本語に仕上がります。</p>
-      </div>
-
-      <div class="prompt-card">
-        <div class="prompt-head">
-          <span class="prompt-badge">①</span>
-          <h3>ベース翻訳｜まずはプロに任せる万能プロンプト</h3>
-        </div>
-        <p class="prompt-desc">ただ翻訳するだけでなく、AIに「プロの翻訳家」という役割を持たせることで、一気に精度が上がります。</p>
-        <div class="prompt-box">あなたはプロの翻訳家です。以下の英文を、文脈や著者の意図を汲み取り、直訳ではない自然な日本語に翻訳してください。
-
-【英文】
-<span class="field">（ここに翻訳したい英文を貼り付ける）</span></div>
-      </div>
-
-      <div class="prompt-card">
-        <div class="prompt-head">
-          <span class="prompt-badge">②</span>
-          <h3>トーン＆マナー調整｜用途に合わせて着せ替えプロンプト</h3>
-        </div>
-        <p class="prompt-desc">お客さまの要望（ビジネス用か、SNS用かなど）に合わせて、文体を変えたいときに使います。</p>
-        <div class="prompt-box">先ほど翻訳した文章を、以下のトーンに合わせて修正してください。
-
-【指定するトーン】※以下から選んで入力
-・ビジネスメールや企業向け資料に適したフォーマルな表現
-・若者向けSNS（InstagramやTikTok）で使われる親しみやすいカジュアルな表現
-・マニュアルや教科書のような、一貫性のある論理的な表現</div>
-      </div>
-
-      <div class="prompt-card">
-        <div class="prompt-head">
-          <span class="prompt-badge">③</span>
-          <h3>文化・ニュアンスの補正｜行間を読むプロンプト</h3>
-        </div>
-        <p class="prompt-desc">直訳だと日本人に伝わりにくい表現や、専門用語、微妙なニュアンスを整えます。</p>
-        <div class="prompt-box">この翻訳において、英語特有の表現や文化的背景による「日本人には伝わりにくい部分」があれば、日本の文化や習慣に合わせてより自然な言い回しに意訳してください。また、変更した箇所とその理由も教えてください。</div>
-      </div>
-
-      <div class="prompt-card">
-        <div class="prompt-head">
-          <span class="prompt-badge">④</span>
-          <h3>最終チェック｜2つの案を比較するプロンプト</h3>
-        </div>
-        <p class="prompt-desc">複数の翻訳ツールを使ってみたときや、言い回しに迷ったときに、一番自然なものを選んでもらいます。</p>
-        <div class="prompt-box">以下の【A】と【B】の翻訳文を比較し、ネイティブの日本人が読んでより自然で違和感のない方はどちらか教えてください。また、両方の良いところを組み合わせた【最高の翻訳案】をひとつ提案してください。
-
-【A】<span class="field">（翻訳案1を貼る）</span>
-【B】<span class="field">（翻訳案2を貼る）</span></div>
-      </div>
-		 <img src="images/img01.jpg " style="width:100%; border-radius:14px;">
-    </div>
-  </section>
-
-  <!-- ================= アドバイス ================= -->
-  <section class="alt">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="tag">アドバイス</span>
-        <h2>🎁 これから翻訳おうちワークを始めたい人へ</h2>
-      </div>
-      <div class="advice">
-        <div class="advice-card">
-          <div class="advice-icon">①</div>
-          <div>
-            <h3>最初は「実績作り」と割り切る</h3>
-            <p>Fiverrでは評価（レビュー）の数がとても大切です。最初の3〜5件くらいは、相場よりも安い価格（5ドルなど）に設定して「迅速かつ丁寧にやります！」とアピールし、良いレビューを集めることを最優先にしましょう。</p>
-          </div>
-        </div>
-        <div class="advice-card">
-          <div class="advice-icon">②</div>
-          <div>
-            <h3>コミュニケーションもAIをフル活用</h3>
-            <p>海外のお客さまからのメッセージや依頼内容も英語で届きますが、焦らなくて大丈夫。DeepLやAIで日本語に訳し、返信もAIに「丁寧な英語のビジネスメールにして」と頼めば、スムーズにやり取りできます。</p>
-          </div>
-        </div>
-        <div class="advice-card">
-          <div class="advice-icon">③</div>
-          <div>
-            <h3>最後は必ず「自分の目」でチェック</h3>
-            <p>AIの翻訳スキルは素晴らしいですが、時々おかしな日本語になることも。「ネイティブの日本人であるあなた自身の感覚」で読んで違和感がないか確認することこそ、お客さまがお金を払って依頼する最大の理由。自信を持って取り組んでくださいね。</p>
-          </div>
+      <div class="prompt-intro">
+        <span class="prompt-tag mincho">TYPE A</span>
+        <h3 class="mincho">静けさと余白の美学</h3>
+        <p>上半分は元の写真の質感をそのまま活かし、下半分をシンプルな線と面で構成した抽象イラストに変換。北欧デザインや美術展ポスターのような、上品で洗練された1枚に仕上がります。</p>
+        <p>文字要素や落ち着いた配色との相性がよく、ブランディング色の強い案件やインテリア系の投稿に向いています。</p>
+        <div class="fit-badges">
+          <span>ポスター・雑貨系デザイン</span>
+          <span>インテリア・暮らし系SNS</span>
+          <span>落ち着いた雰囲気のLP</span>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- ================= 補足：こんな人に／FAQ ================= -->
-  <section>
-    <div class="wrap">
-      <div class="section-head">
-        <span class="tag">補足</span>
-        <h2>🔰 始める前に知っておきたいこと</h2>
+    <div class="prompt-body">
+      <h4>PROMPT TEXT ▽ タップでコピーしてChatGPTに貼り付け</h4>
+      <div class="prompt-box" id="promptA">
+<button class="copy-btn" onclick="copyPrompt('promptA', this)">コピー</button>アップロードした写真1枚ごとに、個別のハイエンドでミニマルなデザインのポスターを作成してください。
+
+複数の画像を組み合わせたコラージュは不可。各写真を独立した作品として出力してください。
+
+全体として、縦3:4の構図を採用し、上下のセクションの高さ比を厳密に1:1とし、それぞれがフレームの50％を占めるようにしてください。
+
+上半分は元の写真をそのまま残し、主な構図、本来の質感、自然な光と影、そしてオリジナルの色彩の雰囲気を維持してください。プロの写真やアート展の品質を感じさせるため、プロの写真家による繊細なカラーグレーディングのみを施してください。
+
+アスペクト比に合わせるため、空や地面、背景を自然に拡張しても構いませんが、被写体を引き伸ばしたり、歪めたり、変更したりしないでください。
+
+下半分は、写真から被写体の最も特徴的な輪郭と構造を抽出し、シンプルな幾何学的形状、フラットカラー、細い線、余白を用いて、様式化された抽象的な表現に仕上げます。
+
+写実的なイラストや複雑なディテールは避けますが、元の被写体が一目でわかるよう、その主要な特徴は残してください。カラーパレットは上部の写真から抽出し、水平線、垂直線、または抽象的な枠線要素は最小限に留めます。
+
+全体として、ベージュまたは明るい色の背景、十分な余白、中央に配置されたメインの被写体、そしてバランスの取れた控えめな構図を使用してください。
+
+国際的なデザインスタジオ、建築ポスター、美術展のポスター、高級ブランドのビジュアルシステムから着想を得た、簡潔な英語のタイトル、シンボル、年号、またはスタイルの参照を少量含めることができます。
+
+エレガントでモダン、洗練され、芸術的であり、下品な決まり文句、安っぽく質の低い印象、漫画的、電子的、またはテンプレート的な感覚は避けてください。</div>
+
+      <div class="tip-box">
+        <b>うまくいくコツ：</b>被写体の輪郭がはっきり分かる写真ほど、下半分のイラストが美しく整います。人物・植物・建物・食器など「形の特徴」がある写真がおすすめ。背景がごちゃついている写真は、あらかじめ被写体をアップで撮り直すか、トリミングしてから使うと仕上がりが安定します。
       </div>
+    </div>
+  </div>
+</section>
 
-      <div class="fit-grid">
-        <div class="fit-card">
-          <div class="h">🕒 かかる時間の目安</div>
-          スキマ時間でOK。1件の翻訳は文字数にもよりますが、AIを使えば30分〜1時間ほどで対応できることも多いです。
-        </div>
-        <div class="fit-card">
-          <div class="h">💴 報酬の受け取り方</div>
-          FiverrはPayoneerなどを経由して銀行口座に出金するのが一般的。登録時に受け取り方法もあわせて確認しておくと安心です。
-        </div>
-        <div class="fit-card">
-          <div class="h">🈂️ 英語力について</div>
-          読んで内容を理解できるレベルがあれば十分。書く部分はAIがサポートしてくれます。
-        </div>
-        <div class="fit-card">
-          <div class="h">📝 最初の一歩</div>
-          まずはアカウント作成とプロフィール入力だけでもOK。完璧を目指さず、少しずつ整えていきましょう。
-        </div>
+<!-- ============ PROMPT B ============ -->
+<section class="wrap">
+  <div class="section-label">
+    <span class="num mincho">PROMPT — B</span>
+    <h2>3Dジオラマ風イラスト</h2>
+  </div>
+
+  <div class="prompt-card">
+    <div class="prompt-card-head">
+      <!-- ▼画像差し替え③：Bタイプの完成イメージ（推奨:縦3:4、上半分=写真/下半分=ジオラマ風イラストの完成例） -->
+      <div class="prompt-img-frame" id="img-b">
+        <img src="" alt="3Dジオラマ風イラストの完成イメージ" onerror="this.style.display='none'">
+        <div class="placeholder-txt"><img src="images/2.jpg " style="width:100%; border-radius:14px;"></div>
+        <span class="swap-tag">REPLACE IMAGE</span>
       </div>
-
-      <div class="faq">
-        <div class="faq-item">
-          <div class="faq-q">Q. 特別なスキルや資格がなくても大丈夫？</div>
-          <div class="faq-a">A. 大丈夫です。日本語ネイティブであること自体が価値になります。まずは実績を積みながら、少しずつ得意分野を広げていくイメージです。</div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-q">Q. 依頼が来ないときはどうしたらいい？</div>
-          <div class="faq-a">A. プロフィールやギグの説明文をAIに見直してもらうのがおすすめ。「もっと魅力的に伝わるように改善して」と頼むだけでも、印象が変わることがあります。</div>
+      <div class="prompt-intro">
+        <span class="prompt-tag mincho">TYPE B</span>
+        <h3 class="mincho">物語を感じるミニチュア世界</h3>
+        <p>下半分を、紙の模型やアイソメトリックな建築模型のようなミニチュア3Dイラストへ変換。被写体のポーズや関係性まで再構築するため、ストーリー性・可愛らしさを求める案件に向いています。</p>
+        <p>エディトリアルな英字タイトルも自動で組み込まれるため、雑誌の1ページのような完成度になります。</p>
+        <div class="fit-badges">
+          <span>キャラクター・ペット系投稿</span>
+          <span>子ども・ファミリー向け素材</span>
+          <span>物語性のあるSNSサムネイル</span>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- ================= CTA ================= -->
-  <section>
-    <div class="wrap">
-      <div class="cta">
-        <div class="mush">🍄🐾</div>
-        <h2>もっとAIおうちワークのコツを知りたい方へ</h2>
-        <p>Instagramでは、AI×おうちワークのリアルな知識やコツを、おまめときの子がゆる〜く発信中。フォローして一緒に一歩ずつ進みましょう！</p>
+    <div class="prompt-body">
+      <h4>PROMPT TEXT ▽ タップでコピーしてChatGPTに貼り付け</h4>
+      <div class="prompt-box" id="promptB">
+<button class="copy-btn" onclick="copyPrompt('promptB', this)">コピー</button>アップロードした写真1枚ごとに、独立したハイエンドなデザインポスターを作成してください。複数の写真を組み合わせたコラージュにはせず、各写真をそれぞれ個別の作品として出力してください。
 
-        <div class="profile-card">
-          <div class="profile-avatar">🍄</div>
-          <div>
-            <div class="profile-name">おまめときの子｜50代のAIのススメ</div>
-            <div class="profile-handle">@kiinoco.omame.ai</div>
-          </div>
-        </div>
+全体は縦3:4の構図とし、上下のセクションの高さを厳密に1:1に分割してください。それぞれがフレーム全体の50％を占めるようにします。
 
-        <a class="cta-btn" href="https://www.instagram.com/kiinoco.omame.ai/?hl=ja" target="_blank" rel="noopener">Instagramをフォローする</a>
+上半分には元の写真を使用し、主要な構図、写実的な質感、自然な光と影、元の色彩や空気感を維持してください。アート雑誌、インディペンデント出版物、写真展の作品のような品質に仕上げるため、繊細で上質なカラーグレーディングのみを施します。
+
+フォーマットに合わせるため、空、地面、周囲の背景を違和感なく自然に拡張しても構いません。ただし、主要な被写体を引き伸ばしたり、歪めたり、変更したりしないでください。
+
+下半分では、写真から最も特徴的な「被写体・輪郭・ポーズ・物語的な関係性」を抽出し、紙の上に展示されたミニチュアの3D模型や建築模型のような、精巧でミニマルなアイソメトリック・イラストとして再構築してください。
+
+写真の細部を機械的に再現するのではなく、単純化したブロック状の造形、明瞭な輪郭、シンプルなレイヤー構造、ミニチュア空間内の関係性によって被写体を再表現します。元の被写体が一目で分かる特徴は残しながら、静かで抑制された、詩的なエディトリアル・イラストの質感に仕上げてください。
+
+全体には「アイソメトリック・パース」「ミニチュア風景」「ペーパーモデル」の構成原理を採用してください。被写体が切り抜かれ、小さな紙や台座の上に配置されているように見せ、周囲には十分な余白を設けます。
+
+立体感の対比、画面端での適度なクロッピング、繊細な影、最小限の小さなディテールによって、スケール感と静かな孤独感を表現してください。被写体を引き立てるため、ごく少数の補助的な要素を追加しても構いませんが、第二の視覚的な主役は作らないでください。
+
+カラーパレットは、すべて元の写真から抽出してください。被写体を象徴する、最も特徴的で雰囲気のある色を優先し、複雑な色彩を「凝縮・純化・軟化・統一」して、限られた色数のパレットへ整理します。
+
+元の写真が持つ暖色と寒色の関係性や色彩の個性は残しながら、視覚的なノイズや雑然さを減らしてください。色はより穏やかで抑制された柔らかなトーンとし、紙媒体のエディトリアル・イラストを思わせる質感に仕上げます。
+
+各ブロックは、同系色の明度差、隣接色の関係、ごくわずかな色相の変化によって区別してください。元の写真と関係のない固定的な配色は使用しないでください。細いインク線、フラットな色面、繊細な影、控えめな紙の粒子感によって、構造と奥行きを表現します。
+
+テキストは、構図の一部として巧みに組み込んでください。写真のテーマ、場所、動作、状態、または雰囲気から、短い英語タイトルを抽出します。必要に応じて、最小限の番号、短いフレーズ、小さな注釈を組み合わせても構いません。
+
+文字は細く、控えめで、モダンなエディトリアルデザインを感じさせるものにしてください。余白の端、被写体の台座、水平軸、アイソメトリック構造などに沿って配置し、グラフィックと調和した、静かで洗練されたタイポグラフィのリズムを形成します。
+
+全体として、「ミニマルなアイソメトリック・イラスト」「ミニチュア3D模型」「紙で作られた風景」「ハイエンドなエディトリアルデザイン」を参照し、静かで詩的、抑制的、精巧、そしてコレクションしたくなるようなビジュアルに仕上げてください。
+
+漫画的な雰囲気、高彩度で衝突する配色、元の写真と無関係な固定カラーパレット、プラスチックのような3Dの光沢、雑然とした複雑なシーン、ECサイトの商品画像のような表現、テンプレート的なデザインは避けてください。</div>
+
+      <div class="tip-box">
+        <b>うまくいくコツ：</b>人物やペットなど「ポーズ・仕草」が伝わる写真だと、ジオラマ化したときの物語性が際立ちます。1枚に被写体が2つ以上写っていると主役がぼやけやすいので、なるべく被写体が1つに絞られた写真を選ぶと安定した結果になります。
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <footer>
-    🍄 きの子のAIおうちワーク講座　|　@kiinoco.omame.ai
-  </footer>
+<div class="divider"></div>
+
+<!-- ============ HOW TO ============ -->
+<section class="wrap">
+  <div class="section-label">
+    <span class="num mincho">HOW TO USE</span>
+    <h2>使い方</h2>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <span class="n mincho">01</span>
+      <div>
+        <h4>ChatGPTに元の写真をアップロード</h4>
+        <p>被写体がはっきり写っている写真を1枚選んで、ChatGPTのチャット画面に添付します。</p>
+      </div>
+    </div>
+    <div class="step">
+      <span class="n mincho">02</span>
+      <div>
+        <h4>A または B のプロンプトを貼り付けて送信</h4>
+        <p>作りたい雰囲気に合わせて、上記のプロンプトをそのままコピー＆ペースト。送信するだけで生成が始まります。</p>
+      </div>
+    </div>
+    <div class="step">
+      <span class="n mincho">03</span>
+      <div>
+        <h4>仕上がりを確認・微調整</h4>
+        <p>思った雰囲気と違う場合は「もう少し明るい配色で」「被写体を大きく」など、日本語で気軽に追加リクエストしてOKです。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============ LINE CTA ============ -->
+<section class="wrap">
+  <div class="worktips line-cta">
+    <div class="section-label">
+      <span class="num mincho">AI × HOME WORK</span>
+      <h2>AIを、仕事や収入にも<br>活かしてみたい方へ</h2>
+    </div>
+
+    <div class="line-cta-copy">
+      <p>私も最初は、AIでこんな画像が作れることに「すごい！」と思って使っていました。</p>
+      <p>でも実際に使っていくうちに、<span class="line-cta-highlight">AIは画像を作るだけじゃなく、仕事や収入にもつなげられる。</span>そう実感するようになりました。</p>
+      <p>「AIを使って、在宅でできることを増やしたい」そんな方には、こちらで詳しくご案内しています。</p>
+    </div>
+
+    <div class="cta-line">
+      <!-- ▼ href の # を、LINE友だち追加URLに差し替えてください -->
+      <a href="https://00m.in/fuqTc" class="line-btn">AIを仕事につなげる方法を見る</a>
+    </div>
+  </div>
+</section>
+
+<footer><footer>きの子🍄50代からのAI在宅ワーク</footer>
+</footer>
+
+<script>
+function copyPrompt(id, btn){
+  const el = document.getElementById(id);
+  const clone = el.cloneNode(true);
+  const b = clone.querySelector('button');
+  if(b) b.remove();
+  const text = clone.innerText.trim();
+  navigator.clipboard.writeText(text).then(()=>{
+    const original = btn.textContent;
+    btn.textContent = 'コピー済み';
+    setTimeout(()=>{btn.textContent = original;}, 1600);
+  });
+}
+</script>
 
 </body>
 </html>
